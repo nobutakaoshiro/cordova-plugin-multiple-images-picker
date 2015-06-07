@@ -28,7 +28,7 @@
     Apache 2.0
   </license>
   <engines>
-    <engine name='cordova' version='>=3.6.0'/>
+    <engine name='cordova' version='>=3.0.0'/>
   </engines>
   <js-module src='www/multiple-images-picker.js' name='MultipleImagesPicker'>
     <clobbers target='window.plugins.multipleImagesPicker'/>

@@ -6,5 +6,14 @@ module.exports = {
                  "MultipleImagesPicker",
                  "hello",
                  [title, message, buttonLabel]);
+  },
+  getPictures: function(successCallback, failureCallback, options) {
+    // [Usage] cordova.exec(successCallback, failureCallback, service, action, [args]);
+    args = []
+    cordova.exec(successCallback,
+                 failureCallback,
+                 "MultipleImagesPicker",
+                 "getPictures",
+                 args);
   }
 };

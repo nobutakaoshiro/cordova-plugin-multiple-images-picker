@@ -2,6 +2,7 @@
 #import <Cordova/CDVPlugin.h>
 
 @interface JHMultipleImagesPicker : CDVPlugin <UIAlertViewDelegate> {}
+- (void)getPictures:(CDVInvokedUrlCommand*)command;
 - (void)hello:(CDVInvokedUrlCommand*)command;
 @end
 

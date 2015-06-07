@@ -2,9 +2,22 @@
 #import "UzysAssetsPickerController.h"
 #import "JHMultipleImagesPicker.h"
 
+
 @implementation JHMultipleImagesPicker
 - (void)pluginInitialize
 {
+}
+
+- (void)getPictures:(CDVInvokedUrlCommand*)command
+{
+  NSString* callbackId = command.callbackId;
+
+  UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
+  picker.delegate = self;
+  picker.maximumNumberOfSelectionMedia = 50;
+  [self.viewController presentViewController:picker animated:YES completion:^{
+
+  }];
 }
 
 - (void)hello:(CDVInvokedUrlCommand*)command

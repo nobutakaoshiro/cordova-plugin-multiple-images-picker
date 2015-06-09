@@ -1,7 +1,4 @@
-#import <AVFoundation/AVFoundation.h>
-#import "UzysAssetsPickerController.h"
 #import "JHMultipleImagesPicker.h"
-
 
 @implementation JHMultipleImagesPicker
 - (void)pluginInitialize

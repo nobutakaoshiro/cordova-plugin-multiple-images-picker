@@ -1,5 +1,5 @@
-#import <UIKit/UIKit.h>
 #import <Cordova/CDVPlugin.h>
+#import "UzysAssetsPickerController.h"
 
 @interface JHMultipleImagesPicker : CDVPlugin <UIAlertViewDelegate> {}
 - (void)getPictures:(CDVInvokedUrlCommand*)command;

@@ -90,7 +90,7 @@
     [self initImagePicker];
     [self setupOneMediaTypeSelection];
 
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     [self setupGroup:^{
         [weakSelf.groupPicker.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     } withSetupAsset:YES];
@@ -98,7 +98,7 @@
     [self setupCollectionView];
     [self setupGroupPickerview];
     [self initNoAssetView];
-    
+
 }
 
 - (void)initVariable
@@ -144,19 +144,19 @@
     self.btnDone.layer.cornerRadius = 15;
     self.btnDone.clipsToBounds = YES;
     [self.btnDone setBackgroundColor:appearanceConfig.finishSelectionButtonColor];
-    
+
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0.5)];
     lineView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.15f];
     [self.bottomView addSubview:lineView];
 }
 - (void)setupGroupPickerview
 {
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     self.groupPicker = [[UzysGroupPickerView alloc] initWithGroups:self.groups];
     self.groupPicker.blockTouchCell = ^(NSInteger row){
         [weakSelf changeGroup:row];
     };
-    
+
     [self.view insertSubview:self.groupPicker aboveSubview:self.bottomView];
     [self.view bringSubviewToFront:self.navigationTop];
     [self menuArrowRotate];
@@ -183,7 +183,7 @@
         {
 //            self.assetsFilter = [ALAssetsFilter allVideos];
             [self setAssetsFilter:[ALAssetsFilter allVideos] type:2];
-            
+
             self.maximumNumberOfSelection = self.maximumNumberOfSelectionVideo;
             self.segmentedControl.hidden = YES;
             self.labelSelectedMedia.hidden = NO;
@@ -196,7 +196,7 @@
         {
 //            self.assetsFilter = [ALAssetsFilter allPhotos];
             [self setAssetsFilter:[ALAssetsFilter allPhotos] type:1];
-            
+
             self.segmentedControl.selectedSegmentIndex = 0;
             self.maximumNumberOfSelection = self.maximumNumberOfSelectionPhoto;
             self.segmentedControl.hidden = YES;
@@ -211,15 +211,15 @@
             self.segmentedControl.hidden = NO;
             self.labelSelectedMedia.hidden = YES;
         }
-        
+
     }
 }
 
 - (void)setupCollectionView
 {
-    
+
     UICollectionViewFlowLayout *layout  = [[UICollectionViewFlowLayout alloc] init];
-    
+
     if(IS_IPHONE_6_IOS8)
     {
         layout.itemSize = kThumbnailSize_IPHONE6;
@@ -240,7 +240,7 @@
     self.collectionView.allowsMultipleSelection = YES;
     [self.collectionView registerClass:[UzysAssetsViewCell class]
             forCellWithReuseIdentifier:kAssetsViewCellIdentifier];
-    
+
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -282,7 +282,7 @@
         self.maximumNumberOfSelection = self.maximumNumberOfSelectionPhoto;
 //        self.assetsFilter = [ALAssetsFilter allPhotos];
         [self setAssetsFilter:[ALAssetsFilter allPhotos] type:1];
-        
+
         [self setupAssets:endBlock];
     }
     else
@@ -290,9 +290,9 @@
         self.maximumNumberOfSelection = self.maximumNumberOfSelectionVideo;
 //        self.assetsFilter = [ALAssetsFilter allVideos];
         [self setAssetsFilter:[ALAssetsFilter allVideos] type:2];
-        
+
         [self setupAssets:endBlock];
-        
+
     }
 }
 - (void)setupGroup:(voidBlock)endblock withSetupAsset:(BOOL)doSetupAsset
@@ -301,19 +301,19 @@
     {
         self.assetsLibrary = [self.class defaultAssetsLibrary];
     }
-    
+
     if (!self.groups)
         self.groups = [[NSMutableArray alloc] init];
     else
         [self.groups removeAllObjects];
-    
-    
-    __weak typeof(self) weakSelf = self;
-    
+
+
+    __weak __typeof(self) weakSelf = self;
+
     ALAssetsFilter *assetsFilter = self.assetsFilter; // number of Asset 메쏘드 호출 시에 적용.
-    
+
     ALAssetsLibraryGroupsEnumerationResultsBlock resultsBlock = ^(ALAssetsGroup *group, BOOL *stop) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         if (group)
         {
             [group setAssetsFilter:assetsFilter];
@@ -347,9 +347,9 @@
             });
         }
     };
-    
+
     ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         //접근이 허락 안되었을 경우
         [strongSelf showNotAllowed];
         strongSelf.segmentedControl.enabled = NO;
@@ -358,9 +358,9 @@
         [strongSelf setTitle:NSLocalizedStringFromTable(@"Not Allowed", @"UzysAssetsPickerController",nil)];
 //        [self.btnTitle setTitle:NSLocalizedStringFromTable(@"Not Allowed", @"UzysAssetsPickerController",nil) forState:UIControlStateNormal];
         [strongSelf.btnTitle setImage:nil forState:UIControlStateNormal];
-        
+
     };
-    
+
     [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll
                                       usingBlock:resultsBlock
                                     failureBlock:failureBlock];
@@ -369,40 +369,40 @@
 - (void)setupAssets:(voidBlock)successBlock
 {
     self.title = [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName];
-    
+
     if (!self.assets)
         self.assets = [[NSMutableArray alloc] init];
     else
         [self.assets removeAllObjects];
-    
+
     if(!self.assetsGroup)
     {
         self.assetsGroup = self.groups[0];
     }
     [self.assetsGroup setAssetsFilter:self.assetsFilter];
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
 
     ALAssetsGroupEnumerationResultsBlock resultsBlock = ^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         if (asset)
         {
             [strongSelf.assets addObject:asset];
-            
+
             NSString *type = [asset valueForProperty:ALAssetPropertyType];
-            
+
             if ([type isEqual:ALAssetTypePhoto])
                 strongSelf.numberOfPhotos ++;
             if ([type isEqual:ALAssetTypeVideo])
                 strongSelf.numberOfVideos ++;
         }
-        
+
         else
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self reloadData];
                 if(successBlock)
                     successBlock();
-                
+
             });
 
         }
@@ -425,39 +425,39 @@
 - (void)initNoAssetView
 {
     UIView *noAssetsView    = [[UIView alloc] initWithFrame:self.collectionView.bounds];
-    
+
     CGRect rect             = CGRectInset(self.collectionView.bounds, 10, 10);
     UILabel *title          = [[UILabel alloc] initWithFrame:rect];
     UILabel *message        = [[UILabel alloc] initWithFrame:rect];
-    
+
     title.text              = NSLocalizedStringFromTable(@"No Photos or Videos", @"UzysAssetsPickerController", nil);
     title.font              = [UIFont systemFontOfSize:19.0];
     title.textColor         = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1];
     title.textAlignment     = NSTextAlignmentCenter;
     title.numberOfLines     = 5;
     title.tag               = kTagNoAssetViewTitleLabel;
-    
+
     message.text            = NSLocalizedStringFromTable(@"You can sync photos and videos onto your iPhone using iTunes.", @"UzysAssetsPickerController",nil);
     message.font            = [UIFont systemFontOfSize:15.0];
     message.textColor       = [UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1];
     message.textAlignment   = NSTextAlignmentCenter;
     message.numberOfLines   = 5;
     message.tag             = kTagNoAssetViewMsgLabel;
-    
+
     UIImageView *titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UzysAssetPickerController.bundle/uzysAP_ico_no_image"]];
     titleImage.contentMode = UIViewContentModeCenter;
     titleImage.tag = kTagNoAssetViewImageView;
-    
+
     [title sizeToFit];
     [message sizeToFit];
-    
+
     title.center            = CGPointMake(noAssetsView.center.x, noAssetsView.center.y - 10 - title.frame.size.height / 2 + 40);
     message.center          = CGPointMake(noAssetsView.center.x, noAssetsView.center.y + 10 + message.frame.size.height / 2 + 20);
     titleImage.center       = CGPointMake(noAssetsView.center.x, noAssetsView.center.y - 10 - titleImage.frame.size.height /2);
     [noAssetsView addSubview:title];
     [noAssetsView addSubview:message];
     [noAssetsView addSubview:titleImage];
-    
+
     [self.collectionView addSubview:noAssetsView];
     self.noAssetView = noAssetsView;
     self.noAssetView.hidden = YES;
@@ -466,42 +466,42 @@
 - (void)showNotAllowed
 {
     self.title              = nil;
-    
+
     UIView *lockedView      = [[UIView alloc] initWithFrame:self.collectionView.bounds];
     UIImageView *locked     = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UzysAssetPickerController.bundle/uzysAP_ico_no_access"]];
     locked.contentMode      = UIViewContentModeCenter;
-    
+
     CGRect rect             = CGRectInset(self.collectionView.bounds, 8, 8);
     UILabel *title          = [[UILabel alloc] initWithFrame:rect];
     UILabel *message        = [[UILabel alloc] initWithFrame:rect];
-    
+
     title.text              = NSLocalizedStringFromTable(@"This app does not have access to your photos or videos.", @"UzysAssetsPickerController",nil);
     title.font              = [UIFont boldSystemFontOfSize:17.0];
     title.textColor         = [UIColor colorWithRed:129.0/255.0 green:136.0/255.0 blue:148.0/255.0 alpha:1];
     title.textAlignment     = NSTextAlignmentCenter;
     title.numberOfLines     = 5;
-    
+
     message.text            = NSLocalizedStringFromTable(@"You can enable access in Privacy Settings.", @"UzysAssetsPickerController",nil);
     message.font            = [UIFont systemFontOfSize:14.0];
     message.textColor       = [UIColor colorWithRed:129.0/255.0 green:136.0/255.0 blue:148.0/255.0 alpha:1];
     message.textAlignment   = NSTextAlignmentCenter;
     message.numberOfLines   = 5;
-    
+
     [title sizeToFit];
     [message sizeToFit];
-    
+
     locked.center           = CGPointMake(lockedView.center.x, lockedView.center.y - locked.bounds.size.height /2 - 20);
     title.center            = locked.center;
     message.center          = locked.center;
-    
+
     rect                    = title.frame;
     rect.origin.y           = locked.frame.origin.y + locked.frame.size.height + 10;
     title.frame             = rect;
-    
+
     rect                    = message.frame;
     rect.origin.y           = title.frame.origin.y + title.frame.size.height + 5;
     message.frame           = rect;
-    
+
     [lockedView addSubview:locked];
     [lockedView addSubview:title];
     [lockedView addSubview:message];
@@ -510,13 +510,13 @@
 
 - (void)showNoAssetsIfNeeded
 {
-    __weak typeof(self) weakSelf = self;
-    
+    __weak __typeof(self) weakSelf = self;
+
     voidBlock setNoImage = ^{
         UIImageView *imgView = (UIImageView *)[weakSelf.noAssetView viewWithTag:kTagNoAssetViewImageView];
         imgView.contentMode = UIViewContentModeCenter;
         imgView.image = [UIImage imageNamed:@"UzysAssetPickerController.bundle/uzysAP_ico_no_image"];
-        
+
         UILabel *title = (UILabel *)[weakSelf.noAssetView viewWithTag:kTagNoAssetViewTitleLabel];
         title.text = NSLocalizedStringFromTable(@"No Photos", @"UzysAssetsPickerController",nil);
         UILabel *msg = (UILabel *)[weakSelf.noAssetView viewWithTag:kTagNoAssetViewMsgLabel];
@@ -532,7 +532,7 @@
         msg.text = NSLocalizedStringFromTable(@"You can sync videos onto your iPhone using iTunes.",@"UzysAssetsPickerController", nil);
 
     };
-    
+
     if(self.assets.count ==0)
     {
         self.noAssetView.hidden = NO;
@@ -592,11 +592,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = kAssetsViewCellIdentifier;
-    
+
     UzysAssetsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+
     [cell applyData:[self.assets objectAtIndex:indexPath.row]];
-    
+
     return cell;
 }
 
@@ -637,16 +637,16 @@
 //    {
 //        [assets addObject:[self.assets objectAtIndex:index.item]];
 //    }
-//    
+//
     if([assets count]>0)
     {
         UzysAssetsPickerController *picker = (UzysAssetsPickerController *)self;
-        
+
         if([picker.delegate respondsToSelector:@selector(uzysAssetsPickerController:didFinishPickingAssets:)])
             [picker.delegate uzysAssetsPickerController:picker didFinishPickingAssets:assets];
-        
+
         [self dismissViewControllerAnimated:YES completion:^{
-            
+
         }];
     }
 }
@@ -693,9 +693,9 @@
     {
         return ;
     }
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        __strong typeof(self) strongSelf = weakSelf;
+        __strong __typeof(self) strongSelf = weakSelf;
         NSDictionary* info = [notification userInfo];
         NSSet *updatedAssets = [info objectForKey:ALAssetLibraryUpdatedAssetsKey];
         NSSet *updatedAssetGroup = [info objectForKey:ALAssetLibraryUpdatedAssetGroupsKey];
@@ -707,19 +707,19 @@
         DLog(@"deleted asset group:%@", deletedAssetGroup);
         DLog(@"inserted asset group:%@", insertedAssetGroup);
         DLog(@"-------------=");
-        
+
         if(info == nil)
         {
             //AllClear
             [strongSelf setupGroup:nil withSetupAsset:YES];
             return;
         }
-        
+
         if(info.count == 0)
         {
             return;
         }
-        
+
         if (deletedAssetGroup.count > 0 || insertedAssetGroup.count > 0 || updatedAssetGroup.count >0)
         {
             BOOL currentAssetsGroupIsInDeletedAssetGroup = NO;
@@ -744,7 +744,7 @@
                     break;
                 }
             }
-            
+
             if (currentAssetsGroupIsInDeletedAssetGroup || [strongSelf.assetsGroup numberOfAssets]==0)
             {
                 //if user really deletes a chosen assetGroup, make it self.groups[0] to be default selected.
@@ -760,7 +760,7 @@
                 {
                     NSMutableArray *selectedItems = [NSMutableArray array];
                     NSArray *selectedPath = strongSelf.collectionView.indexPathsForSelectedItems;
-                  
+
                     for (NSIndexPath *idxPath in selectedPath)
                     {
                         [selectedItems addObject:[strongSelf.assets objectAtIndex:idxPath.row]];
@@ -785,7 +785,7 @@
                                 [strongSelf.orderedSelectedItem removeObject:item];
                             }
                         }
-                    
+
                         [strongSelf setAssetsCountWithSelectedIndexPaths:strongSelf.collectionView.indexPathsForSelectedItems];
                         if(strongSelf.assets.count > beforeAssets)
                         {
@@ -796,7 +796,7 @@
                     [strongSelf setupGroup:^{
                         [strongSelf.groupPicker reloadData];
                     } withSetupAsset:NO];
-                    
+
 
                 }
                 else
@@ -807,10 +807,10 @@
                     return;
                 }
             }
-            
+
         }
-        
-        
+
+
     });
 }
 #pragma mark - Property
@@ -841,7 +841,7 @@
 - (IBAction)btnAction:(id)sender {
 
     UIButton *btn = (UIButton *)sender;
-    
+
     switch (btn.tag) {
         case kTagButtonCamera:
         {
@@ -853,13 +853,13 @@
             }
             else
             {
-                __weak typeof(self) weakSelf = self;
+                __weak __typeof(self) weakSelf = self;
                 [self presentViewController:self.picker animated:YES completion:^{
-                    __strong typeof(self) strongSelf = weakSelf;
+                    __strong __typeof(self) strongSelf = weakSelf;
                     //카메라 화면으로 가면 강제로 카메라 롤로 변경.
                     NSString *curGroupName =[[strongSelf.assetsGroup valueForProperty:ALAssetsGroupPropertyURL] absoluteString];
                     NSString *cameraRollName = [[strongSelf.groups[0] valueForProperty:ALAssetsGroupPropertyURL] absoluteString];
-                    
+
                     if(![curGroupName isEqualToString:cameraRollName] )
                     {
                         strongSelf.assetsGroup = strongSelf.groups[0];
@@ -876,7 +876,7 @@
                 [self.delegate uzysAssetsPickerControllerDidCancel:self];
             }
             [self dismissViewControllerAnimated:YES completion:^{
-                
+
             }];
         }
             break;
@@ -909,7 +909,7 @@
 - (void)saveAssetsAction:(NSURL *)assetURL error:(NSError *)error isPhoto:(BOOL)isPhoto {
     if(error)
         return;
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     [self.assetsLibrary assetForURL:assetURL resultBlock:^(ALAsset *asset) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (asset ==nil)
@@ -920,12 +920,12 @@
             {
                 NSMutableArray *selectedItems = [NSMutableArray array];
                 NSArray *selectedPath = self.collectionView.indexPathsForSelectedItems;
-                
+
                 for (NSIndexPath *idxPath in selectedPath)
                 {
                     [selectedItems addObject:[self.assets objectAtIndex:idxPath.row]];
                 }
-                
+
                 [self.assets insertObject:asset atIndex:0];
                 [self reloadData];
 
@@ -942,7 +942,7 @@
                     }
                 }
                 [self.collectionView setContentOffset:CGPointMake(0, 0) animated:NO];
-                
+
                 if(self.maximumNumberOfSelection > self.collectionView.indexPathsForSelectedItems.count)
                 {
                     NSIndexPath *newPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -951,29 +951,29 @@
                 }
                 [self setAssetsCountWithSelectedIndexPaths:self.collectionView.indexPathsForSelectedItems];
             }
-            
+
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                __strong typeof(weakSelf) strongSelf = weakSelf;
+                __strong __typeof(weakSelf) strongSelf = weakSelf;
                 [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(assetsLibraryUpdated:) name:ALAssetsLibraryChangedNotification object:nil];
             });
-            
-            
+
+
         });
-        
+
     } failureBlock:^(NSError *err){
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
             [[NSNotificationCenter defaultCenter] addObserver:strongSelf selector:@selector(assetsLibraryUpdated:) name:ALAssetsLibraryChangedNotification object:nil];
         });
-        
+
     }];
 }
 
 #pragma mark - UIImagerPickerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    __weak typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     //사진 촬영 시
     if (CFStringCompare((CFStringRef) [info objectForKey:UIImagePickerControllerMediaType], kUTTypeImage, 0) == kCFCompareEqualTo)
     {
@@ -981,7 +981,7 @@
         {
             self.segmentedControl.selectedSegmentIndex = 0;
             [self changeAssetType:YES endBlock:^{
-                __strong typeof(weakSelf) strongSelf = weakSelf;
+                __strong __typeof(weakSelf) strongSelf = weakSelf;
                 UIImage *image = info[UIImagePickerControllerOriginalImage];
                 [[NSNotificationCenter defaultCenter] removeObserver:strongSelf name:ALAssetsLibraryChangedNotification object:nil];
                 [strongSelf.assetsLibrary writeImageToSavedPhotosAlbum:image.CGImage metadata:info[UIImagePickerControllerMediaMetadata] completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -990,16 +990,16 @@
                     });
                     DLog(@"writeImageToSavedPhotosAlbum");
                 }];
-                
+
             }];
-            
+
         }
         else
         {
             UIImage *image = info[UIImagePickerControllerOriginalImage];
             [[NSNotificationCenter defaultCenter] removeObserver:self name:ALAssetsLibraryChangedNotification object:nil];
             [self.assetsLibrary writeImageToSavedPhotosAlbum:image.CGImage metadata:info[UIImagePickerControllerMediaMetadata] completionBlock:^(NSURL *assetURL, NSError *error) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
+                __strong __typeof(weakSelf) strongSelf = weakSelf;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [strongSelf saveAssetsAction:assetURL error:error isPhoto:YES];
                 });
@@ -1013,7 +1013,7 @@
         {
             self.segmentedControl.selectedSegmentIndex = 1;
             [self changeAssetType:NO endBlock:^{
-                __strong typeof(weakSelf) strongSelf = weakSelf;
+                __strong __typeof(weakSelf) strongSelf = weakSelf;
 
                 [[NSNotificationCenter defaultCenter] removeObserver:strongSelf name:ALAssetsLibraryChangedNotification object:nil];
                 [strongSelf.assetsLibrary writeVideoAtPathToSavedPhotosAlbum:info[UIImagePickerControllerMediaURL] completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -1022,7 +1022,7 @@
                         [self saveAssetsAction:assetURL error:error isPhoto:NO];
                     });
                 }];
-                
+
             }];
         }
         else
@@ -1032,20 +1032,20 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self saveAssetsAction:assetURL error:error isPhoto:NO];
                 });
-                
+
             }];
-            
+
         }
     }
-    
+
     [picker dismissViewControllerAnimated:YES completion:^{}];
 
-    
+
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:^{
-        
+
     }];
 }
 

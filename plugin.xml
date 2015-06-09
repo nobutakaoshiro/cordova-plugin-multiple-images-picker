@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -17,64 +17,60 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<plugin xmlns='http://apache.org/cordova/ns/plugins/1.0' id='jp.co.jhack.multipleimagespicker' version='0.0.1'>
-  <name>
-    MultipleImagesPicker
-  </name>
-  <description>
-    A Cordova plugin that multiple images picker
-  </description>
-  <license>
-    Apache 2.0
-  </license>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="jp.co.jhack.multipleimagespicker" version="0.0.1">
+  <name>MultipleImagesPicker</name>
+  <description>A Cordova plugin that multiple images picker</description>
+  <license>Apache 2.0</license>
   <engines>
     <engine name="cordova" version=">=3.6.0"/>
   </engines>
-  <js-module src='www/multiple-images-picker.js' name='MultipleImagesPicker'>
-    <clobbers target='window.plugins.multipleImagesPicker'/>
+  <js-module src="www/MultipleImagesPicker.js" name="MultipleImagesPicker">
+    <clobbers target="window.plugins.multipleImagesPicker"/>
   </js-module>
   <!-- ios -->
-  <platform name='ios'>
-    <config-file target='config.xml' parent='/*'>
-      <feature name='MultipleImagesPicker'>
-        <param name='ios-package' value='JHMultipleImagesPicker'/>
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="MultipleImagesPicker">
+        <param name="ios-package" value="JHMultipleImagesPicker"/>
       </feature>
     </config-file>
 
-    <framework src='Foundation.framework' autogen='true'/>
-    <framework src='QuartzCore.framework' autogen='true'/>
-    <framework src='MobileCoreServices.framework' autogen='true'/>
-    <framework src='AVFoundation.framework' autogen='true'/>
-    <framework src='AssetsLibrary.framework' autogen='true'/>
-    <framework src='CoreGraphics.framework' autogen='true'/>
+    <framework src="Foundation.framework"/>
+    <framework src="QuartzCore.framework"/>
+    <framework src="MobileCoreServices.framework"/>
+    <framework src="AVFoundation.framework"/>
+    <framework src="AssetsLibrary.framework"/>
+    <framework src="CoreGraphics.framework"/>
 
-    <header-file src='src/ios/vendor/UIImage+UzysExtension.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UIImage+UzysExtension.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UIImage+UzysExtension.h"/>
+    <source-file src="src/ios/vendor/UIImage+UzysExtension.m"/>
 
-    <header-file src='src/ios/vendor/UzysAppearanceConfig.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UzysAppearanceConfig.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysAppearanceConfig.h"/>
+    <source-file src="src/ios/vendor/UzysAppearanceConfig.m"/>
 
-    <header-file src='src/ios/vendor/UzysAssetsPickerController.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UzysAssetsPickerController.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysAssetsPickerController.h"/>
+    <source-file src="src/ios/vendor/UzysAssetsPickerController.m"/>
 
-    <header-file src='src/ios/vendor/UzysAssetsPickerController_Configuration.h' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysAssetsPickerController_Configuration.h"/>
 
-    <header-file src='src/ios/vendor/UzysAssetsViewCell.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UzysAssetsViewCell.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysAssetsViewCell.h"/>
+    <source-file src="src/ios/vendor/UzysAssetsViewCell.m"/>
 
-    <header-file src='src/ios/vendor/UzysGroupPickerView.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UzysGroupPickerView.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysGroupPickerView.h"/>
+    <source-file src="src/ios/vendor/UzysGroupPickerView.m"/>
 
-    <header-file src='src/ios/vendor/UzysGroupViewCell.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UzysGroupViewCell.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysGroupViewCell.h"/>
+    <source-file src="src/ios/vendor/UzysGroupViewCell.m"/>
 
-    <header-file src='src/ios/vendor/UzysWrapperPickerController.h' autogen='true'/>
-    <source-file src='src/ios/vendor/UzysWrapperPickerController.m' autogen='true'/>
+    <header-file src="src/ios/vendor/UzysWrapperPickerController.h"/>
+    <source-file src="src/ios/vendor/UzysWrapperPickerController.m"/>
 
-    <resource-file src='src/ios/vendor/resources/UzysAssetsPickerController.xib' autogen='true'/>
-    <resource-file src='src/ios/vendor/resources/UzysAssetPickerController.bundle' autogen='true'/>
+    <resource-file src="src/ios/vendor/resources/UzysAssetsPickerController.xib"/>
+    <resource-file src="src/ios/vendor/resources/UzysAssetPickerController.bundle"/>
 
-    <header-file src='src/ios/JHMultipleImagesPicker.h'/>
-    <source-file src='src/ios/JHMultipleImagesPicker.m'/>
+    <header-file src="src/ios/JHMultipleImagesPicker.h"/>
+    <source-file src="src/ios/JHMultipleImagesPicker.m"/>
+
+    <framework src="libUzysAssetsPickerController.a"/>
   </platform>
 </plugin>

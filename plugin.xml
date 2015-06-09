@@ -28,7 +28,7 @@
     Apache 2.0
   </license>
   <engines>
-    <engine name="cordova" version=">=3.0.0"/>
+    <engine name="cordova" version=">=3.6.0"/>
   </engines>
   <js-module src='www/multiple-images-picker.js' name='MultipleImagesPicker'>
     <clobbers target='window.plugins.multipleImagesPicker'/>
@@ -40,6 +40,7 @@
         <param name='ios-package' value='JHMultipleImagesPicker'/>
       </feature>
     </config-file>
+
     <framework src='Foundation.framework' autogen='true'/>
     <framework src='QuartzCore.framework' autogen='true'/>
     <framework src='MobileCoreServices.framework' autogen='true'/>
@@ -56,8 +57,8 @@
     <header-file src='src/ios/vendor/headers/UzysWrapperPickerController.h' autogen='true'/>
     <resource-file src='src/ios/vendor/resources/UzysAssetsPickerController.xib' autogen='true'/>
     <resource-file src='src/ios/vendor/resources/UzysAssetPickerController.bundle' autogen='true'/>
-    <source-file framework='true' src='src/ios/vendor/libUzysAssetsPickerController.a' autogen='true'/>
-    <header-file src="src/ios/JHMultipleImagesPicker.h" />
-    <source-file src="src/ios/JHMultipleImagesPicker.m" />
+    <source-file framework='true' src='src/ios/vendor/libuzysassetspickercontroller.a' autogen='true'/>
+    <header-file src='src/ios/JHMultipleImagesPicker.h'/>
+    <source-file src='src/ios/JHMultipleImagesPicker.m'/>
   </platform>
 </plugin>

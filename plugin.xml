@@ -17,7 +17,7 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<plugin xmlns='http://apache.org/cordova/ns/plugins/1.0' id='jp.co.jhack.multipleImagesPicker' version='0.0.1'>
+<plugin xmlns='http://apache.org/cordova/ns/plugins/1.0' id='jp.co.j-hack.multiple-images-picker' version='0.0.1'>
   <name>
     MultipleImagesPicker
   </name>
@@ -27,9 +27,6 @@
   <license>
     Apache 2.0
   </license>
-  <engines>
-    <engine name='cordova' version='>=3.0.0'/>
-  </engines>
   <js-module src='www/multiple-images-picker.js' name='MultipleImagesPicker'>
     <clobbers target='window.plugins.multipleImagesPicker'/>
   </js-module>
@@ -54,11 +51,10 @@
     <header-file src='src/ios/vendor/headers/UzysGroupPickerView.h' autogen='true'/>
     <header-file src='src/ios/vendor/headers/UzysGroupViewCell.h' autogen='true'/>
     <header-file src='src/ios/vendor/headers/UzysWrapperPickerController.h' autogen='true'/>
+    <header-file src="src/ios/JHMultipleImagesPicker.h" />
     <resource-file src='src/ios/vendor/resources/UzysAssetsPickerController.xib' autogen='true'/>
     <resource-file src='src/ios/vendor/resources/UzysAssetPickerController.bundle' autogen='true'/>
     <source-file framework='true' src='src/ios/vendor/libUzysAssetsPickerController.a' autogen='true'/>
-
-    <header-file src="src/ios/JHMultipleImagesPicker.h" />
     <source-file src="src/ios/JHMultipleImagesPicker.m" />
   </platform>
 </plugin>

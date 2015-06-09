@@ -47,17 +47,33 @@
     <framework src='AVFoundation.framework' autogen='true'/>
     <framework src='AssetsLibrary.framework' autogen='true'/>
     <framework src='CoreGraphics.framework' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UIImage+UzysExtension.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysAppearanceConfig.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysAssetsPickerController.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysAssetsPickerController_Configuration.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysAssetsViewCell.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysGroupPickerView.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysGroupViewCell.h' autogen='true'/>
-    <header-file src='src/ios/vendor/headers/UzysWrapperPickerController.h' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UIImage+UzysExtension.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UIImage+UzysExtension.m' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysAppearanceConfig.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UzysAppearanceConfig.m' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysAssetsPickerController.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UzysAssetsPickerController.m' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysAssetsPickerController_Configuration.h' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysAssetsViewCell.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UzysAssetsViewCell.m' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysGroupPickerView.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UzysGroupPickerView.m' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysGroupViewCell.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UzysGroupViewCell.m' autogen='true'/>
+
+    <header-file src='src/ios/vendor/UzysWrapperPickerController.h' autogen='true'/>
+    <source-file src='src/ios/vendor/UzysWrapperPickerController.m' autogen='true'/>
+
     <resource-file src='src/ios/vendor/resources/UzysAssetsPickerController.xib' autogen='true'/>
     <resource-file src='src/ios/vendor/resources/UzysAssetPickerController.bundle' autogen='true'/>
-    <source-file framework='true' src='src/ios/vendor/libuzysassetspickercontroller.a' autogen='true'/>
+
     <header-file src='src/ios/JHMultipleImagesPicker.h'/>
     <source-file src='src/ios/JHMultipleImagesPicker.m'/>
   </platform>

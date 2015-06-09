@@ -70,7 +70,5 @@
 
     <header-file src="src/ios/JHMultipleImagesPicker.h"/>
     <source-file src="src/ios/JHMultipleImagesPicker.m"/>
-
-    <framework src="libUzysAssetsPickerController.a"/>
   </platform>
 </plugin>

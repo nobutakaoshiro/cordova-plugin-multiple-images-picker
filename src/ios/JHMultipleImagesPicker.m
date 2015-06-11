@@ -10,32 +10,34 @@
 
 - (void)getPictures:(CDVInvokedUrlCommand*)command
 {
-    self.callbackId = command.callbackId;
-    NSDictionary *options = [command.arguments objectAtIndex: 0];
+    [self.commandDelegate runInBackground:^{
+        self.callbackId = command.callbackId;
+        NSDictionary *options = [command.arguments objectAtIndex: 0];
 
-    self.maximumNumberOfSelectionPhoto = [[options objectForKey:@"maximumNumberOfSelectionPhoto"] integerValue];
-    self.maximumNumberOfSelectionVideo = [[options objectForKey:@"maximumNumberOfSelectionVideo"] integerValue];
-    self.maximumNumberOfSelectionMedia = [[options objectForKey:@"maximumNumberOfSelectionMedia"] integerValue];
+        self.maximumNumberOfSelectionPhoto = [[options objectForKey:@"maximumNumberOfSelectionPhoto"] integerValue];
+        self.maximumNumberOfSelectionVideo = [[options objectForKey:@"maximumNumberOfSelectionVideo"] integerValue];
+        self.maximumNumberOfSelectionMedia = [[options objectForKey:@"maximumNumberOfSelectionMedia"] integerValue];
 
-    // Picker config
-    UzysAppearanceConfig *appearanceConfig = [[UzysAppearanceConfig alloc] init];
-    appearanceConfig.finishSelectionButtonColor = [UIColor blueColor];
-    appearanceConfig.assetsGroupSelectedImageName = @"checker";
-    [UzysAssetsPickerController setUpAppearanceConfig:appearanceConfig];
+        // Picker config
+        UzysAppearanceConfig *appearanceConfig = [[UzysAppearanceConfig alloc] init];
+        appearanceConfig.finishSelectionButtonColor = [UIColor blueColor];
+        appearanceConfig.assetsGroupSelectedImageName = @"checker";
+        [UzysAssetsPickerController setUpAppearanceConfig:appearanceConfig];
 
-    // initialize Picker
-    UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
-    picker.delegate = self;
-    if (self.maximumNumberOfSelectionMedia > 0) {
-        picker.maximumNumberOfSelectionMedia = self.maximumNumberOfSelectionMedia;
-    } else {
-        picker.maximumNumberOfSelectionPhoto = self.maximumNumberOfSelectionPhoto;
-        picker.maximumNumberOfSelectionVideo = self.maximumNumberOfSelectionVideo;
-    }
+        // initialize Picker
+        UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
+        picker.delegate = self;
+        if (self.maximumNumberOfSelectionMedia > 0) {
+            picker.maximumNumberOfSelectionMedia = self.maximumNumberOfSelectionMedia;
+        } else {
+            picker.maximumNumberOfSelectionPhoto = self.maximumNumberOfSelectionPhoto;
+            picker.maximumNumberOfSelectionVideo = self.maximumNumberOfSelectionVideo;
+        }
 
-    // show Picker
-    [self.viewController presentViewController:picker animated:YES completion:^{
-        // noop
+        // show Picker
+        [self.viewController presentViewController:picker animated:YES completion:^{
+            // noop
+        }];
     }];
 }
 
